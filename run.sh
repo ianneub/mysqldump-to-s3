@@ -27,8 +27,8 @@ if [ -z "${MYSQL_ENV_MYSQL_USER}" ]; then
   exit 1
 fi
 
-if [ -z "${MYSQL_ENV_MYSQL_PASS}" ]; then
-  echo "You need to set the MYSQL_ENV_MYSQL_PASS environment variable."
+if [ -z "${MYSQL_ENV_MYSQL_PASSWORD}" ]; then
+  echo "You need to set the MYSQL_ENV_MYSQL_PASSWORD environment variable."
   exit 1
 fi
 
@@ -42,7 +42,7 @@ if [ -z "${MYSQL_PORT_3306_TCP_PORT}" ]; then
   exit 1
 fi
 
-MYSQL_HOST_OPTS="-h $MYSQL_PORT_3306_TCP_ADDR --port $MYSQL_PORT_3306_TCP_PORT -u $MYSQL_ENV_MYSQL_USER -p$MYSQL_ENV_MYSQL_PASS"
+MYSQL_HOST_OPTS="-h $MYSQL_PORT_3306_TCP_ADDR --port $MYSQL_PORT_3306_TCP_PORT -u $MYSQL_ENV_MYSQL_USER -p$MYSQL_ENV_MYSQL_PASSWORD"
 
 echo "Starting dump of ${MYSQLDUMP_DATABASE} database(s) from ${MYSQL_PORT_3306_TCP_ADDR}..."
 
