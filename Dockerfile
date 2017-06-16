@@ -6,10 +6,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y mysql-client py
   rm -rf /var/lib/apt/lists/*
 
 ENV MYSQLDUMP_OPTIONS --quote-names --quick --add-drop-table --add-locks --allow-keywords --disable-keys --extended-insert --single-transaction --create-options --comments --net_buffer_length=16384
-ENV MYSQLDUMP_DATABASE --all-databases
+ENV MYSQLDUMP_DATABASES **All**
+ENV MYSQLDUMP_TABLES **All**
 
-ENV AWS_ACCESS_KEY_ID **None**
-ENV AWS_SECRET_ACCESS_KEY **None**
 ENV AWS_BUCKET **None**
 
 ENV PREFIX **None**
