@@ -33,11 +33,15 @@ if [ -z "${MYSQL_PORT_3306_TCP_PORT}" ]; then
   exit 1
 fi
 
+if [ -z "${DATE_FORMAT}" ]; then
+  DATE_FORMAT="%Y/%m/%d"
+fi
+
 MYSQL_HOST_OPTS="-h $MYSQL_PORT_3306_TCP_ADDR --port $MYSQL_PORT_3306_TCP_PORT -u $MYSQL_ENV_MYSQL_USER -p$MYSQL_ENV_MYSQL_PASSWORD"
 
 echo "Starting dump of ${MYSQLDUMP_DATABASE} database(s) from ${MYSQL_PORT_3306_TCP_ADDR}..."
 
-mysqldump $MYSQL_HOST_OPTS $MYSQLDUMP_OPTIONS $MYSQLDUMP_DATABASE | gzip | aws s3 cp - s3://$AWS_BUCKET/$PREFIX/$(date +"%Y")/$(date +"%m")/$(date +"%d_%H:%M").sql.gz
+mysqldump $MYSQL_HOST_OPTS $MYSQLDUMP_OPTIONS $MYSQLDUMP_DATABASE | gzip | aws s3 cp - s3://$AWS_BUCKET/$PREFIX/$(date +"$DATE_FORMAT").sql.gz
 
 echo "Done!"
 
